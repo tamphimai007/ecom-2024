@@ -1,7 +1,7 @@
 // rafce
 import React, { useEffect, useState } from 'react'
 import useEcomStore from '../../store/ecom-store'
-import { createProduct } from '../../api/product'
+import { createProduct, deleteProduct } from '../../api/product'
 import { toast } from 'react-toastify'
 import Uploadfile from './Uploadfile'
 import { Link } from 'react-router-dom'
@@ -10,10 +10,10 @@ import { Link } from 'react-router-dom'
 
 
 const initialState = {
-    title: "Core i7",
-    description: "desc",
-    price: 200,
-    quantity: 20,
+    title: "",
+    description: "",
+    price: 0,
+    quantity: 0,
     categoryId: '',
     images: []
 }
@@ -30,7 +30,7 @@ const FormProduct = () => {
     useEffect(() => {
         // code
         getCategory(token)
-        getProduct(token,100)
+        getProduct(token, 100)
     }, [])
 
 
@@ -46,11 +46,28 @@ const FormProduct = () => {
         try {
             const res = await createProduct(token, form)
             console.log(res)
+            setForm(initialState)
+            getProduct(token)
             toast.success(`เพิ่มข้อมูล ${res.data.title} สำเร็จ`)
         } catch (err) {
             console.log(err)
         }
     }
+    const handleDelete = async (id) => {
+        if (window.confirm('จะลบจริงๆ หรอ')) {
+            try {
+                // code
+                const res = await deleteProduct(token, id)
+                console.log(res)
+                toast.success('Deleted สินค้าเรียบร้อยแล้ว')
+                getProduct(token)
+            } catch (err) {
+                console.log(err)
+            }
+
+        }
+    }
+
 
     return (
         <div className='container mx-auto p-4 bg-white shadow-md'>
@@ -134,16 +151,16 @@ const FormProduct = () => {
 
 
                                         <td>
-                                                {
-                                                    item.images.length > 0
-                                                    ? <img 
-                                                    className='w-24 h-24 rounded-lg shadow-md'
-                                                    src={item.images[0].url}/>
-                                                    : <div 
-                                                    className='w-24 h-24 bg-gray-200 rounded-md 
+                                            {
+                                                item.images.length > 0
+                                                    ? <img
+                                                        className='w-24 h-24 rounded-lg shadow-md'
+                                                        src={item.images[0].url} />
+                                                    : <div
+                                                        className='w-24 h-24 bg-gray-200 rounded-md 
                                                     flex items-center justify-center shadow-sm'
                                                     >No Image</div>
-                                                }
+                                            }
 
                                         </td>
 
@@ -154,13 +171,18 @@ const FormProduct = () => {
                                         <td>{item.quantity}</td>
                                         <td>{item.sold}</td>
                                         <td>{item.updatedAt}</td>
-                                        <td>
+                                        <td className='flex gap-2'>
                                             <p className='bg-yellow-500 rounded-md p-1 shadow-md'>
                                                 <Link to={'/admin/product/' + item.id}>
                                                     แก้ไข
                                                 </Link>
                                             </p>
-                                            <p>ลบ</p>
+
+                                            <p
+                                                className='bg-red-500 rounded-md p-1 shadow-md'
+                                                onClick={() => handleDelete(item.id)}
+                                            >ลบ</p>
+
                                         </td>
                                     </tr>
                                 )
