@@ -4,6 +4,7 @@ import useEcomStore from '../../store/ecom-store'
 import { createProduct } from '../../api/product'
 import { toast } from 'react-toastify'
 import Uploadfile from './Uploadfile'
+import { Link } from 'react-router-dom'
 
 
 
@@ -29,7 +30,7 @@ const FormProduct = () => {
     useEffect(() => {
         // code
         getCategory(token)
-        getProduct(token, 100)
+        getProduct(token,100)
     }, [])
 
 
@@ -112,6 +113,7 @@ const FormProduct = () => {
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
+                            <th scope="col">รูปภาพ</th>
                             <th scope="col">ชื่อสินค้า</th>
                             <th scope="col">รายละเอียด</th>
                             <th scope="col">ราคา</th>
@@ -129,6 +131,23 @@ const FormProduct = () => {
                                 return (
                                     <tr key={index}>
                                         <th scope="row">{index + 1}</th>
+
+
+                                        <td>
+                                                {
+                                                    item.images.length > 0
+                                                    ? <img 
+                                                    className='w-24 h-24 rounded-lg shadow-md'
+                                                    src={item.images[0].url}/>
+                                                    : <div 
+                                                    className='w-24 h-24 bg-gray-200 rounded-md 
+                                                    flex items-center justify-center shadow-sm'
+                                                    >No Image</div>
+                                                }
+
+                                        </td>
+
+
                                         <td>{item.title}</td>
                                         <td>{item.description}</td>
                                         <td>{item.price}</td>
@@ -136,7 +155,11 @@ const FormProduct = () => {
                                         <td>{item.sold}</td>
                                         <td>{item.updatedAt}</td>
                                         <td>
-                                            <p>แก้ไข</p>
+                                            <p className='bg-yellow-500 rounded-md p-1 shadow-md'>
+                                                <Link to={'/admin/product/' + item.id}>
+                                                    แก้ไข
+                                                </Link>
+                                            </p>
                                             <p>ลบ</p>
                                         </td>
                                     </tr>
