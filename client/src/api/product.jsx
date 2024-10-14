@@ -31,3 +31,16 @@ export const uploadFiles = async (token, form) => {
     })
 }
 
+export const removeFiles = async (token, public_id) => {
+    // code 
+    // console.log('form api frontent', form)
+    return axios.post('http://localhost:5001/api/removeimages', {
+        public_id
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+

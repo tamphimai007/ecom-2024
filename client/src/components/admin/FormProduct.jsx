@@ -29,7 +29,7 @@ const FormProduct = () => {
     useEffect(() => {
         // code
         getCategory(token)
-        getProduct(token, 20)
+        getProduct(token, 100)
     }, [])
 
 
