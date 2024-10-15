@@ -4,14 +4,16 @@ import { toast } from 'react-toastify'
 import Resize from 'react-image-file-resizer'
 import { removeFiles, uploadFiles } from '../../api/product'
 import useEcomStore from '../../store/ecom-store'
-
+import { Loader } from 'lucide-react';
 
 const Uploadfile = ({ form, setForm }) => {
     // Javascript
     const token = useEcomStore((state) => state.token)
     const [isLoading, setIsLoading] = useState(false)
+
     const handleOnChange = (e) => {
         // code
+        setIsLoading(true)
         const files = e.target.files
         if (files) {
             setIsLoading(true)
@@ -43,10 +45,12 @@ const Uploadfile = ({ form, setForm }) => {
                                     ...form,
                                     images: allFiles
                                 })
+                                setIsLoading(false)
                                 toast.success('Upload image Sucess!!!')
                             })
                             .catch((err) => {
                                 console.log(err)
+                                setIsLoading(false)
                             })
                     },
                     "base64"
@@ -58,29 +62,33 @@ const Uploadfile = ({ form, setForm }) => {
     }
     console.log(form)
 
-    const handleDelete = (public_id)=>{
+    const handleDelete = (public_id) => {
         const images = form.images
-        removeFiles(token,public_id)
-        .then((res)=> {
-            const filterImages = images.filter((item)=>{
-                console.log(item)
-                return  item.public_id !== public_id
-            })
+        removeFiles(token, public_id)
+            .then((res) => {
+                const filterImages = images.filter((item) => {
+                    console.log(item)
+                    return item.public_id !== public_id
+                })
 
-            console.log('filterImages',filterImages)
-            setForm({
-                ...form,
-                images: filterImages
+                console.log('filterImages', filterImages)
+                setForm({
+                    ...form,
+                    images: filterImages
+                })
+                toast.error(res.data)
             })
-            toast.error(res.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     return (
         <div className='my-4'>
             <div className='flex mx-4 gap-4 my-4'>
+                {
+                    isLoading && <Loader className='w-16 h-16 animate-spin'/>
+                }
+                
                 {/* Image */}
                 {
                     form.images.map((item, index) =>
@@ -89,9 +97,9 @@ const Uploadfile = ({ form, setForm }) => {
                                 className='w-24 h-24 hover:scale-105'
                                 src={item.url} />
 
-                            <span 
-                            onClick={()=>handleDelete(item.public_id)}
-                            className='absolute top-0 right-0 bg-red-500 p-1 rounded-md'>X</span>
+                            <span
+                                onClick={() => handleDelete(item.public_id)}
+                                className='absolute top-0 right-0 bg-red-500 p-1 rounded-md'>X</span>
                         </div>
                     )
                 }
