@@ -1,7 +1,9 @@
 // rafce
-
 import React, { useEffect, useState } from 'react'
 import useEcomStore from '../../store/ecom-store'
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
 
 const SearchCard = () => {
     const getProduct = useEcomStore((state) => state.getProduct)
@@ -14,6 +16,8 @@ const SearchCard = () => {
     const [text, setText] = useState('')
     const [categorySelected, setCategorySelected] = useState([])
 
+    const [price, setPrice] = useState([1000, 30000])
+    const [ok, setOk] = useState(false)
 
 
     // console.log(categories)
@@ -61,7 +65,17 @@ const SearchCard = () => {
     console.log(categorySelected)
 
     // Step 3 Search by Price
+    useEffect(() => {
+        actionSearchFilters({ price })
+    }, [ok])
+    const handlePrice = (value) => {
+        console.log(value)
+        setPrice(value)
 
+        setTimeout(() => {
+            setOk(!ok)
+        }, 300)
+    }
 
 
     return (
@@ -92,7 +106,26 @@ const SearchCard = () => {
                     }
                 </div>
             </div>
+            <hr />
+            {/* Search by Price */}
+            <div>
+                <h1>ค้นหาราคา</h1>
+                <div>
+                    <div className='flex justify-between'>
+                        <span>Min : {price[0]}</span>
+                        <span>Max : {price[1]}</span>
+                    </div>
 
+
+                    <Slider
+                        onChange={handlePrice}
+                        range
+                        min={0}
+                        max={100000}
+                        defaultValue={[1000, 30000]}
+                    />
+                </div>
+            </div>
 
 
         </div>
