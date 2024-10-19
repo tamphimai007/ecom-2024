@@ -56,13 +56,15 @@ const SearchCard = () => {
             inState.splice(findCheck, 1)
         }
         setCategorySelected(inState)
-        if (inState > 0) {
+
+
+        if (inState.length > 0) {
             actionSearchFilters({ category: inState })
         } else {
             getProduct()
         }
     }
-    console.log(categorySelected)
+    // console.log(categorySelected)
 
     // Step 3 Search by Price
     useEffect(() => {

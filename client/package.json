@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.451.0",
     "rc-slider": "^11.1.7",
     "react": "^18.3.1",
