@@ -119,7 +119,7 @@ exports.getUserCart = async (req, res) => {
                 }
             }
         })
-        // console.log(cart)
+        console.log(cart)
         res.json({
             products: cart.products,
             cartTotal: cart.cartTotal
