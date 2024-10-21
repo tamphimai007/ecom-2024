@@ -77,7 +77,7 @@ const CartCard = () => {
                 </button>
               </div>
               {/* Right */}
-              <div className="font-bold text-blue-500">{item.price}</div>
+              <div className="font-bold text-blue-500">{item.price * item.count}</div>
             </div>
           </div>
         ))}
