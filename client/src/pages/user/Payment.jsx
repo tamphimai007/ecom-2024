@@ -4,9 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { payment } from "../../api/stripe";
 import useEcomStore from "../../store/ecom-store";
 import CheckoutForm from "../../components/CheckoutForm";
-const stripePromise = loadStripe(
-  "pk_test_51QCvzSDMh1GPiyhysqtt8DTOOXYRdDyM5kKoTgiQOrFFB8pFfoIxym74nh4jVfacAvnfiIZdXogdiuuZPWj6x05Q00XOkbJIjC"
-);
+const stripePromise = loadStripe("Please insert key");
 
 const Payment = () => {
   const token = useEcomStore((s) => s.token);
