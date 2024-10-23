@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.7",
-    "prisma": "^5.20.0"
+    "prisma": "^5.20.0",
+    "stripe": "^17.2.1"
   }
 }

@@ -56,7 +56,7 @@ const SummaryCard = () => {
 
   return (
     <div className="mx-auto">
-      <div className="flex flex-warp gap-4">
+      <div className="flex flex-wrap gap-4">
         {/* Left */}
         <div className="w-2/4">
           <div
