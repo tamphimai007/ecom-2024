@@ -21,7 +21,7 @@ npm install @prisma/client
 // Doc ใช้ในการสร้างและอัพเดตฐานข้อมูล
 npx prisma migrate dev --name ecom
 
-
+npx prisma migrate dev --create-only
 
 
 
