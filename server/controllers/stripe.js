@@ -1,6 +1,6 @@
 const prisma = require("../config/prisma");
 const stripe = require("stripe")(
-  "Please Insert Key"
+  ""
 );
 
 exports.payment = async (req, res) => {
@@ -10,11 +10,11 @@ exports.payment = async (req, res) => {
     // req.user.id
 
     const cart = await prisma.cart.findFirst({
-      where:{
-        orderedById : req.user.id
-      }
-    })
-    const amountTHB = cart.cartTotal * 100
+      where: {
+        orderedById: req.user.id,
+      },
+    });
+    const amountTHB = cart.cartTotal * 100;
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
@@ -27,9 +27,8 @@ exports.payment = async (req, res) => {
     });
 
     res.send({
-        clientSecret: paymentIntent.client_secret,
-      });
-
+      clientSecret: paymentIntent.client_secret,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server Error" });
