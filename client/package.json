@@ -13,6 +13,7 @@
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.9.0",
     "axios": "^1.7.7",
+    "framer-motion": "^11.11.10",
     "lodash": "^4.17.21",
     "lucide-react": "^0.451.0",
     "moment": "^2.30.1",
