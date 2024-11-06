@@ -9,6 +9,8 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
+
+
 const ContentCarousel = () => {
   // Javascript
   const [data, setData] = useState([]);

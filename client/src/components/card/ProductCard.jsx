@@ -37,8 +37,8 @@ const ProductCard = ({ item }) => {
         </div>
 
         <div className="py-2">
-          <p className="text-xl">{item.title}</p>
-          <p className="text-sm text-gray-500">{item.description}</p>
+          <p className="text-xl truncate">{item.title}</p>
+          <p className="text-sm text-gray-500 truncate">{item.description}</p>
         </div>
 
         <div className="flex justify-between items-center">
