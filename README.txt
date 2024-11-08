@@ -93,4 +93,7 @@ npm i lodash
 npm i rc-slider
 npm i numeral
 npm install moment
+
+npm install react-hook-form zod @hookform/resolvers zxcvbn
+
 --------------------------
