@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 const LoadingToRedirect = () => {
-    const [count, setCount] = useState(3)
+    const [count, setCount] = useState(5)
     const [redirect, setRedirect] = useState(false)
 
     useEffect(() => {
